@@ -9,18 +9,18 @@ app.use(bodyParser.json());
 let data = {};
 
 app.post('/data', (req, res) => {
-    const { id, timestamp, value } = req.body;
+    const { id, timestamp, bpm } = req.body;
 
-    if (!id || !timestamp || value === undefined) {
-        return res.status(400).json({ message: 'Invalid input. Please provide id, timestamp, and value.' });
+    if (!id || !timestamp || bpm === undefined) {
+        return res.status(400).json({ message: 'Invalid input. Please provide id, timestamp, and bpm.' });
     }
 
     if (!data[id]) {
         data[id] = []; 
     }
 
-    data[id].push({ id, timestamp, value });
-    return res.status(201).json({ message: 'Data added successfully.', d: { id, timestamp, value } });
+    data[id].push({ id, timestamp, bpm });
+    return res.status(201).json({ message: 'Data added successfully.', d: { id, timestamp, bpm } });
 });
 
 app.get('/data', (req, res) => {
